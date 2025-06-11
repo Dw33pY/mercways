@@ -19,6 +19,68 @@
             color: #333;
             background-color: #f8f9fa;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Main Content Layout */
+        .main-content {
+            display: flex;
+            flex: 1;
+        }
+        
+        /* Sidebar Navigation */
+        .sidebar {
+            width: 250px;
+            background: #1a3e72;
+            color: white;
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .sidebar-header h2 {
+            font-size: 1.3rem;
+            color: white;
+        }
+        
+        .nav-menu {
+            list-style: none;
+        }
+        
+        .nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.8rem 1rem;
+            border-radius: 4px;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255,255,255,0.1);
+        }
+        
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            padding: 2rem;
         }
         
         /* Improved Container */
@@ -34,7 +96,7 @@
             background: #1a3e72;
             color: white;
             padding: 1rem;
-            text-align: center;
+            text-align: right;
             border-bottom: 5px solid #e8491d;
             margin-bottom: 2rem;
         }
@@ -52,61 +114,18 @@
             border-bottom: 1px solid rgba(255,255,255,0.2);
         }
         
-        /* Modern Mobile-Friendly Navigation */
-        nav {
-            background: #e8491d;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.8rem 1rem;
-        }
-        
-        .logo {
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            text-decoration: none;
-        }
-        
-        .hamburger {
+        /* Mobile Navigation Toggle */
+        .mobile-nav-toggle {
             display: none;
             cursor: pointer;
             background: none;
             border: none;
-            color: white;
+            color: orange;
             font-size: 1.5rem;
-        }
-        
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-item {
-            margin: 0 0.5rem;
-        }
-        
-        .nav-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
-            transition: all 0.3s ease;
-            display: block;
-        }
-        
-        .nav-link:hover {
-            background: rgba(255,255,255,0.2);
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1100;
         }
         
         /* Hero Section */
@@ -318,31 +337,71 @@
             text-align: center;
         }
         
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: #e8491d;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background: #d1401a;
+            transform: translateY(-3px);
+        }
+        
         /* Responsive Adjustments */
+        @media (max-width: 992px) {
+            .sidebar {
+                width: 220px;
+            }
+        }
+        
         @media (max-width: 768px) {
-            .hamburger {
-                display: block;
+            .main-content {
+                flex-direction: column;
             }
             
-            .nav-menu {
+            .sidebar {
                 position: fixed;
                 left: -100%;
-                top: 60px;
-                flex-direction: column;
-                background: #e8491d;
-                width: 100%;
-                text-align: center;
-                transition: 0.3s;
-                box-shadow: 0 10px 27px rgba(0,0,0,0.05);
-                padding: 1rem 0;
+                top: 0;
+                height: 100vh;
+                width: 280px;
+                padding-top: 60px;
+                transition: all 0.3s ease;
             }
             
-            .nav-menu.active {
+            .sidebar.active {
                 left: 0;
             }
             
-            .nav-item {
-                margin: 1rem 0;
+            .content-area {
+                padding: 1rem;
+                margin-left: 0;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
             }
             
             #hero {
@@ -378,6 +437,14 @@
             .loan-options {
                 flex-direction: column;
             }
+            
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
         
         /* Animation */
@@ -393,249 +460,295 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <!-- Letter Head
-    <div class="letter-head">
-        <p>LONAK, Business Centre | 2nd Floor RM A20</p>
-        <p>P.O.Box 767 – 00618 | Tel: +2547 5215 9662</p>
-        <p>Email: metcwaystk@gmail.com | Website: www.mercwaysltd.com</p>
-        <p class="motto">Where Dreams Come True</p>
-    </div> -->
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" id="mobile-nav-toggle">
+        <i class="fas fa-bars"></i>
+    </button>
 
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#" class="logo">MERCWAYS EXCELLING</a>
-            <button class="hamburger" id="hamburger">
-                <i class="fas fa-bars"></i>
-            </button>
-            <ul class="nav-menu" id="nav-menu">
-                <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+    <div class="main-content">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>MERCWAYS EXCELLING</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
                 <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
                 <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="#values" class="nav-link">Our Values</a></li>
                 <li class="nav-item"><a href="#expertise" class="nav-link">Expertise</a></li>
                 <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
             </ul>
-        </div>
-    </nav>
+        </aside>
 
-    <!-- Hero Section -->
-    <section id="hero">
-        <div class="container">
-            <h2>Welcome to Mercways Excelling Ltd</h2>
-            <p>Mercways Excelling Limited is an independently owned recruitment consultancy firm, which offers unrivalled recruitment and staffing solutions for both work candidates and employers. We are at the helm of human resource sector focusing on all elements of recruitment.</p>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Mercways Excelling Limited is one of the top growing recruitment firms with its focus on premium placement services.</p>
-            <p>We are legally registered with the ministry of labor and we engage in job placements of highly qualified trained, competent skilled and unskilled staffs globally. We commit ourselves to satisfy our clients and staffs.</p>
-            
-            <div class="mission-box">
-                <h3>Our Mission</h3>
-                <p>To provide excellent, prompt, and efficient services that consistently meet needs using a combination of deep industry knowledge, integrity and experiences. We maintain the highest standards in clients and applicants care.</p>
+        <!-- Content Area -->
+        <main class="content-area">
+            <!-- Letter Head -->
+            <div class="letter-head">
+                <p>LONAK, Business Centre | 2nd Floor RM A20</p>
+                <p>P.O.Box 767 – 00618 | Tel: +2547 5215 9662</p>
+                <p>Email: metcwaystk@gmail.com | Website: www.mercwaysltd.com</p>
+                <p class="motto">Where Dreams Come True</p>
             </div>
-            
-            <h3>The Team</h3>
-            <p>Our company is led by a team of recruitment experts with specialist knowledge of a whole range of markets and industries. Our consultants bring together a rare blend of years of recruitment and industry expertise which is reflected in the range of recruitment options we offer our clients and the sheer speed of our recruitment and selection process.</p>
-            <p>Providing excellent customer service and sustained support to our clients and candidates underpins our business and is an area we are always developing. Our candidates and clients benefit intensely from our extensive network of industry contacts and the specialist sector knowledge of our consultants.</p>
-        </div>
-    </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container">
-            <h2>What We Do</h2>
-            <p>We aim to provide a tailored and professional recruitment services that helps best meet the needs of our clients. To provide strong, fast dynamic and responsive experience to our clients by searching the best candidates.</p>
-            <p>Mercways Excelling Limited aims to focus on the enhancement of client organizations by providing quality services on various aspects of their human resource and letting the organization focus on its core values. Our solutions aim in reducing employers recruitment process by searching through CVs, responding to candidates and arranging interviews. We do this by providing on-site and off-site recruiters who are dedicated in giving our clients value for their money.</p>
-        </div>
-    </section>
+            <!-- Hero Section -->
+            <section id="hero">
+                <div class="container">
+                    <h2>Welcome to Mercways Excelling Ltd</h2>
+                    <p>Mercways Excelling Limited is an independently owned recruitment consultancy firm, which offers unrivalled recruitment and staffing solutions for both work candidates and employers. We are at the helm of human resource sector focusing on all elements of recruitment.</p>
+                </div>
+            </section>
 
-    <!-- Values Section -->
-    <section id="values">
-        <div class="container">
-            <h2>Our Guiding Values</h2>
-            <p>At Mercways Excelling Limited our values are reflected in the way we do business. Integrity and honesty represent the foundation of all operations. Furthermore, we strive to conduct our business and ourselves in a most professional manner.</p>
-            <p>We also conduct ourselves with a policy of utmost good faith and as a results, we are determined to provide our clients with the best recruitment solution for their business.</p>
-            
-            <ul class="values-list">
-                <li>
-                    <h3>Integrity</h3>
-                    <p>Inspiring trust and confidence through maintaining ethical and professional standards, saying what we mean, doing what we say and taking responsibility of our actions.</p>
-                </li>
-                <li>
-                    <h3>Openness</h3>
-                    <p>Fostering a collaborative way of working through information sharing, actively listening and giving constructive challenge.</p>
-                </li>
-                <li>
-                    <h3>Results Focused</h3>
-                    <p>Striving to deliver on our commitments with our clients needs in mind, on time and to the highest standard.</p>
-                </li>
-            </ul>
-            
-            <h3>Equal Opportunities Policy</h3>
-            <p>Mercways Excelling Limited is committed to providing a working environment in which employees are able to realize their full potential and contribute to business success irrespective of his or her gender, race, color, nationality, ethnic or racial origin, marital status, sexual orientation, religion, or disability, ensuring that the provisions of equality are strictly adhered to.</p>
-            <p>Mercways Excelling Limited is committed to identifying and eliminating discriminatory practices, procedures and attitudes throughout the organization. Specifically, Mercways Excelling Limited aims to ensure that no employee or job applicant is discriminated against, either directly or indirectly.</p>
-        </div>
-    </section>
-
-    <!-- Expertise Section -->
-    <section id="expertise">
-        <div class="container">
-            <h2>Areas of Expertise</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <h3>Technical</h3>
-                    <ul>
-                        <li>Heavy engineering and fabrication</li>
-                        <li>Building and Construction</li>
-                        <li>Onshore and Offshore drilling</li>
-                        <li>Transportation</li>
-                        <li>Power Stations</li>
-                        <li>Agriculture</li>
-                        <li>Automotive electronics and Mechanic</li>
-                        <li>Various Semi-Skilled workforce</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <h3>Hospitality and Catering</h3>
-                    <ul>
-                        <li>Concierges</li>
-                        <li>Butler</li>
-                        <li>Room Attendant</li>
-                        <li>House Keepers</li>
-                        <li>Chefs</li>
-                        <li>Waiters</li>
-                        <li>Valet Attendant</li>
-                        <li>Guest Relations</li>
-                        <li>General Maintenance</li>
-                        <li>Bartenders and Janitorial Services</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <h3>Security Services</h3>
-                    <ul>
-                        <li>Patrol Units</li>
-                        <li>Security Guards</li>
-                        <li>Body Guards</li>
-                        <li>Doormen</li>
-                        <li>Observers</li>
-                        <li>Camp Support Staff</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <h3>Retail Services and Customer Care</h3>
-                    <ul>
-                        <li>Showroom Staff</li>
-                        <li>Shop Attendants</li>
-                        <li>Cashiers</li>
-                        <li>Cleaners</li>
-                        <li>Customer Service Staff</li>
-                        <li>Call Center Staff</li>
-                        <li>Semi-skilled and skilled Maintenance Personnel</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <h3>Health Care and Pharmaceuticals</h3>
-                    <ul>
-                        <li>General Practitioners</li>
-                        <li>Nurses</li>
-                        <li>Doctors</li>
-                        <li>Therapists</li>
-                        <li>Paramedics</li>
-                        <li>Laboratory Technicians</li>
-                        <li>Dermatologists</li>
-                        <li>Radiologists</li>
-                    </ul>
-                </div>
-                
-                <div class="service-card">
-                    <h3>Information Technology</h3>
-                    <ul>
-                        <li>Project Managers</li>
-                        <li>Software Developers</li>
-                        <li>Programmers</li>
-                        <li>Web Designers</li>
-                        <li>E-Commerce Executives</li>
-                        <li>Other IT Professionals</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Loan Section -->
-    <section id="loan">
-        <div class="container">
-            <div class="loan-section">
-                <h3>MAXIMUM LOAN AMOUNT: KSH 25,000</h3>
-                <div class="loan-options">
-                    <div class="loan-option">
-                        <h4>3 MONTHS</h4>
+            <!-- About Section -->
+            <section id="about">
+                <div class="container">
+                    <h2>About Us</h2>
+                    <p>Mercways Excelling Limited is one of the top growing recruitment firms with its focus on premium placement services.</p>
+                    <p>We are legally registered with the ministry of labor and we engage in job placements of highly qualified trained, competent skilled and unskilled staffs globally. We commit ourselves to satisfy our clients and staffs.</p>
+                    
+                    <div class="mission-box">
+                        <h3>Our Mission</h3>
+                        <p>To provide excellent, prompt, and efficient services that consistently meet needs using a combination of deep industry knowledge, integrity and experiences. We maintain the highest standards in clients and applicants care.</p>
                     </div>
-                    <div class="loan-option">
-                        <h4>4 MONTHS</h4>
-                    </div>
-                    <div class="loan-option">
-                        <h4>5 MONTHS</h4>
+                    
+                    <h3>The Team</h3>
+                    <p>Our company is led by a team of recruitment experts with specialist knowledge of a whole range of markets and industries. Our consultants bring together a rare blend of years of recruitment and industry expertise which is reflected in the range of recruitment options we offer our clients and the sheer speed of our recruitment and selection process.</p>
+                    <p>Providing excellent customer service and sustained support to our clients and candidates underpins our business and is an area we are always developing. Our candidates and clients benefit intensely from our extensive network of industry contacts and the specialist sector knowledge of our consultants.</p>
+                </div>
+            </section>
+
+            <!-- Services Section -->
+            <section id="services">
+                <div class="container">
+                    <h2>What We Do</h2>
+                    <p>We aim to provide a tailored and professional recruitment services that helps best meet the needs of our clients. To provide strong, fast dynamic and responsive experience to our clients by searching the best candidates.</p>
+                    <p>Mercways Excelling Limited aims to focus on the enhancement of client organizations by providing quality services on various aspects of their human resource and letting the organization focus on its core values. Our solutions aim in reducing employers recruitment process by searching through CVs, responding to candidates and arranging interviews. We do this by providing on-site and off-site recruiters who are dedicated in giving our clients value for their money.</p>
+                </div>
+            </section>
+
+            <!-- Values Section -->
+            <section id="values">
+                <div class="container">
+                    <h2>Our Guiding Values</h2>
+                    <p>At Mercways Excelling Limited our values are reflected in the way we do business. Integrity and honesty represent the foundation of all operations. Furthermore, we strive to conduct our business and ourselves in a most professional manner.</p>
+                    <p>We also conduct ourselves with a policy of utmost good faith and as a results, we are determined to provide our clients with the best recruitment solution for their business.</p>
+                    
+                    <ul class="values-list">
+                        <li>
+                            <h3>Integrity</h3>
+                            <p>Inspiring trust and confidence through maintaining ethical and professional standards, saying what we mean, doing what we say and taking responsibility of our actions.</p>
+                        </li>
+                        <li>
+                            <h3>Openness</h3>
+                            <p>Fostering a collaborative way of working through information sharing, actively listening and giving constructive challenge.</p>
+                        </li>
+                        <li>
+                            <h3>Results Focused</h3>
+                            <p>Striving to deliver on our commitments with our clients needs in mind, on time and to the highest standard.</p>
+                        </li>
+                    </ul>
+                    
+                    <h3>Equal Opportunities Policy</h3>
+                    <p>Mercways Excelling Limited is committed to providing a working environment in which employees are able to realize their full potential and contribute to business success irrespective of his or her gender, race, color, nationality, ethnic or racial origin, marital status, sexual orientation, religion, or disability, ensuring that the provisions of equality are strictly adhered to.</p>
+                    <p>Mercways Excelling Limited is committed to identifying and eliminating discriminatory practices, procedures and attitudes throughout the organization. Specifically, Mercways Excelling Limited aims to ensure that no employee or job applicant is discriminated against, either directly or indirectly.</p>
+                </div>
+            </section>
+
+            <!-- Expertise Section -->
+            <section id="expertise">
+                <div class="container">
+                    <h2>Areas of Expertise</h2>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h3>Technical</h3>
+                            <ul>
+                                <li>Heavy engineering and fabrication</li>
+                                <li>Building and Construction</li>
+                                <li>Onshore and Offshore drilling</li>
+                                <li>Transportation</li>
+                                <li>Power Stations</li>
+                                <li>Agriculture</li>
+                                <li>Automotive electronics and Mechanic</li>
+                                <li>Various Semi-Skilled workforce</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h3>Hospitality and Catering</h3>
+                            <ul>
+                                <li>Concierges</li>
+                                <li>Butler</li>
+                                <li>Room Attendant</li>
+                                <li>House Keepers</li>
+                                <li>Chefs</li>
+                                <li>Waiters</li>
+                                <li>Valet Attendant</li>
+                                <li>Guest Relations</li>
+                                <li>General Maintenance</li>
+                                <li>Bartenders and Janitorial Services</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h3>Security Services</h3>
+                            <ul>
+                                <li>Patrol Units</li>
+                                <li>Security Guards</li>
+                                <li>Body Guards</li>
+                                <li>Doormen</li>
+                                <li>Observers</li>
+                                <li>Camp Support Staff</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h3>Retail Services and Customer Care</h3>
+                            <ul>
+                                <li>Showroom Staff</li>
+                                <li>Shop Attendants</li>
+                                <li>Cashiers</li>
+                                <li>Cleaners</li>
+                                <li>Customer Service Staff</li>
+                                <li>Call Center Staff</li>
+                                <li>Semi-skilled and skilled Maintenance Personnel</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h3>Health Care and Pharmaceuticals</h3>
+                            <ul>
+                                <li>General Practitioners</li>
+                                <li>Nurses</li>
+                                <li>Doctors</li>
+                                <li>Therapists</li>
+                                <li>Paramedics</li>
+                                <li>Laboratory Technicians</li>
+                                <li>Dermatologists</li>
+                                <li>Radiologists</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-card">
+                            <h3>Information Technology</h3>
+                            <ul>
+                                <li>Project Managers</li>
+                                <li>Software Developers</li>
+                                <li>Programmers</li>
+                                <li>Web Designers</li>
+                                <li>E-Commerce Executives</li>
+                                <li>Other IT Professionals</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
+            </section>
 
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            <div class="contact-info">
-                <h3>Address</h3>
-                <p><i class="fas fa-map-marker-alt"></i> Jewel Complex, 5th Floor<br>
-                Roysambu, Along Thika Road<br>
-                P.O BOX 767-00618<br>
-                Ruaraka-Nairobi<br>
-                Kenya</p>
-                
-                <h3>Contacts</h3>
-                <p><i class="fas fa-envelope"></i> Email: mercwaysdocs@gmail.com</p>
-                <p><i class="fas fa-phone"></i> Tel: +254 752 159 662</p>
-                <p><i class="fab fa-facebook"></i> Facebook: Mercways Excelling Limited</p>
-            </div>
-        </div>
-    </section>
+            <!-- Loan Section -->
+            <section id="loan">
+                <div class="container">
+                    <div class="loan-section">
+                        <h3>MAXIMUM LOAN AMOUNT: KSH 25,000</h3>
+                        <div class="loan-options">
+                            <div class="loan-option">
+                                <h4>3 MONTHS</h4>
+                            </div>
+                            <div class="loan-option">
+                                <h4>4 MONTHS</h4>
+                            </div>
+                            <div class="loan-option">
+                                <h4>5 MONTHS</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-            <p>&copy; 2023 Mercways Excelling Limited. All rights reserved.</p>
-            <p>Where dreams come true</p>
-        </div>
-    </footer>
+            <!-- Contact Section -->
+            <section id="contact">
+                <div class="container">
+                    <h2>Contact Us</h2>
+                    <div class="contact-info">
+                        <h3>Address</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Jewel Complex, 5th Floor<br>
+                        Roysambu, Along Thika Road<br>
+                        P.O BOX 767-00618<br>
+                        Ruaraka-Nairobi<br>
+                        Kenya</p>
+                        
+                        <h3>Contacts</h3>
+                        <p><i class="fas fa-envelope"></i> Email: mercwaysdocs@gmail.com</p>
+                        <p><i class="fas fa-phone"></i> Tel: +254 752 159 662</p>
+                        <p><i class="fab fa-facebook"></i> Facebook: Mercways Excelling Limited</p>
+                    </div>
+                </div>
+            </section>
+
+            <footer>
+                <div class="container">
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                    <p>&copy; 2023 Mercways Excelling Limited. All rights reserved.</p>
+                    <p>Where dreams come true</p>
+                </div>
+            </footer>
+        </main>
+    </div>
+
+    <!-- Back to Top Button -->
+    <a href="index.html" class="back-to-top" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
 
     <script>
         // Mobile Navigation Toggle
-        const hamburger = document.getElementById('hamburger');
-        const navMenu = document.getElementById('nav-menu');
+        const mobileNavToggle = document.getElementById('mobile-nav-toggle');
+        const sidebar = document.getElementById('sidebar');
         
-        hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+        mobileNavToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            mobileNavToggle.innerHTML = sidebar.classList.contains('active') ? 
+                '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
         
-        // Close menu when clicking a link
+        // Close menu when clicking a link (for mobile)
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.add('active');
+            } else {
+                backToTopButton.classList.remove('active');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
             });
         });
     </script>
