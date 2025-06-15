@@ -127,6 +127,41 @@
             left: 15px;
             z-index: 1100;
         }
+
+        /* Logo Styles */
+        .logo-container {
+            text-align: center;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .sidebar-logo {
+            max-width: 100%;
+            height: auto;
+            max-height: 100px;
+            object-fit: contain;
+        }
+
+        /* Adjust sidebar header for logo */
+        .sidebar-header h2 {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            color: white;
+            text-align: center;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .sidebar-logo {
+                max-width: 100%;
+                max-height: 80px;
+            }
+            
+            .sidebar-header h2 {
+                font-size: 1rem;
+            }
+        }
         
         /* Hero Section */
         #hero {
@@ -461,43 +496,47 @@
 </head>
 <body>
     <!-- Mobile Navigation Toggle -->
-    <button class="mobile-nav-toggle" id="mobile-nav-toggle">
-        <i class="fas fa-bars"></i>
-    </button>
+<button class="mobile-nav-toggle" id="mobile-nav-toggle">
+    <i class="fas fa-bars"></i>
+</button>
 
-    <div class="main-content">
-        <!-- Sidebar Navigation -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-header">
-                <h2>MERCWAYS EXCELLING</h2>
+<div class="main-content">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <!-- Logo added here -->
+            <div class="logo-container">
+                <img src="logo/mercways logo no bg.png" alt="Mercways Excelling Limited Logo" class="sidebar-logo">
             </div>
-            <ul class="nav-menu">
-                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
-                <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
-                <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
-                <li class="nav-item"><a href="#values" class="nav-link">Our Values</a></li>
-                <li class="nav-item"><a href="#expertise" class="nav-link">Expertise</a></li>
-                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-        </aside>
+            <h2>MERCWAYS EXCELLING</h2>
+        </div>
+        <ul class="nav-menu">
+            <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#about" class="nav-link">About Us</a></li>
+            <li class="nav-item"><a href="#services" class="nav-link">Services</a></li>
+            <li class="nav-item"><a href="#values" class="nav-link">Our Values</a></li>
+            <li class="nav-item"><a href="#expertise" class="nav-link">Expertise</a></li>
+            <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </aside>
 
-        <!-- Content Area -->
-        <main class="content-area">
-            <!-- Letter Head -->
-            <div class="letter-head">
-                <p>LONAK, Business Centre | 2nd Floor RM A20</p>
-                <p>P.O.Box 767 – 00618 | Tel: +2547 5215 9662</p>
-                <p>Email: metcwaystk@gmail.com | Website: www.mercwaysltd.com</p>
-                <p class="motto">Where Dreams Come True</p>
+    <!-- Rest of your content remains the same -->
+    <main class="content-area">
+        <!-- Letter Head -->
+        <div class="letter-head">
+            <p>LONAK, Business Centre | 2nd Floor RM A20</p>
+            <p>P.O.Box 767 – 00618 | Tel: +2547 5215 9662</p>
+            <p>Email: metcwaystk@gmail.com | Website: www.mercwaysltd.com</p>
+            <p class="motto">Where Dreams Come True</p>
+        </div>
+
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h2>Welcome to Mercways Excelling Ltd</h2>
+                <p>Mercways Excelling Limited is an independently owned recruitment consultancy firm, which offers unrivalled recruitment and staffing solutions for both work candidates and employers. We are at the helm of human resource sector focusing on all elements of recruitment.</p>
             </div>
-
-            <!-- Hero Section -->
-            <section id="hero">
-                <div class="container">
-                    <h2>Welcome to Mercways Excelling Ltd</h2>
-                    <p>Mercways Excelling Limited is an independently owned recruitment consultancy firm, which offers unrivalled recruitment and staffing solutions for both work candidates and employers. We are at the helm of human resource sector focusing on all elements of recruitment.</p>
-                </div>
-            </section>
+        </section>
 
             <!-- About Section -->
             <section id="about">
